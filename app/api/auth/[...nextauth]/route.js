@@ -4,7 +4,7 @@ import FacebookProvider from "next-auth/providers/facebook";
 import GoogleProvider from "next-auth/providers/google";
 import TwitterProvider from "next-auth/providers/twitter";
 
-const facebookSecret = process.env.FACEBOOK_SECRET || process.env.FACEBOOK_SECERT;
+const facebookSecret = process.env.FACEBOOK_SECRET;
 
 const handler = NextAuth({
   secret: process.env.NEXTAUTH_SECRET,
