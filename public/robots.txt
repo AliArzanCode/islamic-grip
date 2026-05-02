@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://islamic-grip.xyz
+
+# Sitemaps
+Sitemap: https://islamic-grip.xyz/sitemap.xml
