@@ -1,4 +1,4 @@
 module.exports = {
-  siteUrl:process.env.NEXTAUTH_URL || 'https://islamic-grip.xyz',
+  siteUrl:process.env.NEXTAUTH_URL,
   generateRobotsTxt: true,
 };
