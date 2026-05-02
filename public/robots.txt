@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: ${process.env.NEXTAUTH_URL}
+
+# Sitemaps
+Sitemap: ${process.env.NEXTAUTH_URL}/sitemap.xml
