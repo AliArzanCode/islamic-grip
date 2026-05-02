@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: http://islamic-grip.xyz
+Host: https://islamic-grip.xyz
 
 # Sitemaps
-Sitemap: http://islamic-grip.xyz/sitemap.xml
+Sitemap: https://islamic-grip.xyz/sitemap.xml
