@@ -1,5 +1,5 @@
 module.exports = {
-  siteUrl:process.env.NEXTAUTH_URL,
+  siteUrl:`${process.env.NEXTAUTH_URL}`,
   generateRobotsTxt: true,
    robotsTxtOptions: {
     additionalSitemaps: [
