@@ -3,8 +3,8 @@
 
 @font-face {
   font-family: 'Jameel Noori Nastaleeq';
-  src: url('/fonts/JameelNooriNastaleeq.woff2') format('woff2'),
-       url('/fonts/JameelNooriNastaleeq.woff') format('woff');
+  src: url('/fonts/jameel-noori-nastaleeq.woff2') format('woff2'),
+        url('/fonts/jameel-noori-nastaleeq.woff') format('woff');
   font-weight: normal;
   font-style: oblique;
   font-display: swap;
