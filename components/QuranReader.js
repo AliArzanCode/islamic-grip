@@ -128,7 +128,7 @@ export default function QuranReader({
                     </div>
                     <p
                       dir={LANGUAGE_UI[selectedLanguage]?.dir || "ltr"}
-                      className="text-lg sm:text-lg md:text-base font-bold leading-8 text-gray-800 md:font-normal"
+                      className={selectedLanguage === "urdu" ? "urdu text-lg sm:text-lg md:text-base font-semibold leading-8 text-gray-800 md:font-normal" : "text-lg sm:text-lg md:text-base font-bold leading-8 text-gray-800 md:font-normal"}
                     >
                       {ayahItem.text}
                     </p>

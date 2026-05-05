@@ -1,8 +1,27 @@
+@import url('https://fonts.googleapis.com/earlyaccess/notonastaliqurdu.css');
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'Jameel Noori Nastaleeq';
+  src: url('/fonts/JameelNooriNastaleeq.woff2') format('woff2'),
+       url('/fonts/JameelNooriNastaleeq.woff') format('woff');
+  font-weight: normal;
+  font-style: oblique;
+  font-display: swap;
+}
 html,
 body {
   overflow-x: hidden;
+}
+
+.urdu {
+  font-family: 'Jameel Noori Nastaleeq', serif;
+  direction: rtl;
+  text-align: right;
+  line-height: 2.8;
+  font-size: 30px;
+  word-spacing: 3px;
+
 }
 
 .font  {
