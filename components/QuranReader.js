@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 const DEFAULT_TRANSLATION_ENDPOINTS = {
   english: "https://api.alquran.cloud/v1/quran/en.asad",
@@ -17,6 +18,7 @@ const LANGUAGE_UI = {
 export default function QuranReader({
   onClose,
   translationApiMap = DEFAULT_TRANSLATION_ENDPOINTS,
+  initialSurahNumber,
 }) {
   const [quranSurahs, setQuranSurahs] = useState([]);
   const [quranLoading, setQuranLoading] = useState(true);
@@ -41,8 +43,18 @@ export default function QuranReader({
         }
 
         const data = await res.json();
-        setQuranSurahs(data?.data?.surahs || []);
-        setCurrentSurahIndex(0);
+        const surahs = data?.data?.surahs || [];
+        setQuranSurahs(surahs);
+
+        if (
+          typeof initialSurahNumber === "number" &&
+          initialSurahNumber >= 1 &&
+          initialSurahNumber <= surahs.length
+        ) {
+          setCurrentSurahIndex(initialSurahNumber - 1);
+        } else {
+          setCurrentSurahIndex(0);
+        }
       } catch {
         setQuranError("Unable to load Quran data right now.");
       } finally {
@@ -52,6 +64,27 @@ export default function QuranReader({
 
     fetchQuran();
   }, [selectedLanguage, translationApiMap]);
+
+  useEffect(() => {
+    if (!quranSurahs?.length) return;
+    if (
+      typeof initialSurahNumber === "number" &&
+      initialSurahNumber >= 1 &&
+      initialSurahNumber <= quranSurahs.length
+    ) {
+      setCurrentSurahIndex(initialSurahNumber - 1);
+    }
+  }, [initialSurahNumber, quranSurahs]);
+
+  const router = useRouter();
+
+  const handleSurahSelect = (event) => {
+    const selectedSurahNumber = parseInt(event.target.value, 10);
+    if (isNaN(selectedSurahNumber)) return;
+
+    setCurrentSurahIndex(selectedSurahNumber - 1);
+    router.push(`/Quran/${selectedSurahNumber}`);
+  };
 
   const currentSurah = quranSurahs[currentSurahIndex];
   const canGoPrevious = currentSurahIndex > 0;
@@ -101,21 +134,41 @@ export default function QuranReader({
                 <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-gray-500">
                   Translation
                 </p>
-                <div className="flex flex-wrap gap-2">
-                  {Object.entries(LANGUAGE_UI).map(([languageKey, languageInfo]) => (
-                    <button
-                      key={languageKey}
-                      type="button"
-                      onClick={() => setSelectedLanguage(languageKey)}
-                      className={`rounded-full border px-4 py-1.5 text-sm font-medium transition ${
-                        selectedLanguage === languageKey
-                          ? "border-gray-900 bg-gray-900 text-white"
-                          : "border-gray-300 bg-white text-gray-700 hover:border-gray-400"
-                      }`}
+                <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+                  <div className="flex flex-wrap gap-2">
+                    {Object.entries(LANGUAGE_UI).map(([languageKey, languageInfo]) => (
+                      <button
+                        key={languageKey}
+                        type="button"
+                        onClick={() => setSelectedLanguage(languageKey)}
+                        className={`rounded-full border px-4 py-1.5 text-sm font-medium transition ${
+                          selectedLanguage === languageKey
+                            ? "border-gray-900 bg-gray-900 text-white"
+                            : "border-gray-300 bg-white text-gray-700 hover:border-gray-400"
+                        }`}
+                      >
+                        {languageInfo.label}
+                      </button>
+                    ))}
+                  </div>
+
+                  <div className="flex items-center gap-2 lg:ml-auto">
+                    <label htmlFor="surah-select" className="text-sm text-gray-700">
+                      Choose Surah:
+                    </label>
+                    <select
+                      id="surah-select"
+                      value={currentSurah?.number || ""}
+                      onChange={handleSurahSelect}
+                      className="max-w-xs rounded-full border border-gray-300 bg-white px-3 py-1.5 text-sm text-gray-800"
                     >
-                      {languageInfo.label}
-                    </button>
-                  ))}
+                      {quranSurahs.map((surah) => (
+                        <option key={surah.number} value={surah.number}>
+                          {surah.number}. {surah.englishName}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
                 </div>
               </div>
 
@@ -128,7 +181,13 @@ export default function QuranReader({
                     </div>
                     <p
                       dir={LANGUAGE_UI[selectedLanguage]?.dir || "ltr"}
-                      className={selectedLanguage === "urdu" ? "urdu text-lg sm:text-lg md:text-base font-semibold leading-8 text-gray-800 md:font-normal" : "text-lg sm:text-lg md:text-base font-bold leading-8 text-gray-800 md:font-normal"}
+                      className={
+                        selectedLanguage === "urdu"
+                          ? "urdu text-lg sm:text-lg md:text-base font-semibold leading-8 text-gray-800 md:font-normal"
+                          : selectedLanguage === "arabic"
+                            ? "arabic-text text-lg sm:text-lg md:text-base font-bold leading-8 text-gray-800 md:font-normal"
+                            : "text-lg sm:text-lg md:text-base font-bold leading-8 text-gray-800 md:font-normal"
+                      }
                     >
                       {ayahItem.text}
                     </p>
@@ -140,7 +199,13 @@ export default function QuranReader({
             <div className="flex    md:justify-between w-auto items-center gap-2 pt-3 ">
               <button
                 type="button"
-                onClick={() => setCurrentSurahIndex((current) => current - 1)}
+                onClick={() =>
+                  setCurrentSurahIndex((current) => {
+                    const next = current - 1;
+                    if (next >= 0) router.push(`/Quran/${next + 1}`);
+                    return next;
+                  })
+                }
                 disabled={!canGoPrevious}
                 className=" md:w-auto inline-flex items-center gap-2 rounded-full bg-gray-900 px-3 py-2 text-sm font-medium text-white transition hover:bg-gray-700 disabled:cursor-not-allowed disabled:opacity-40"
               >
@@ -154,7 +219,13 @@ export default function QuranReader({
 
               <button
                 type="button"
-                onClick={() => setCurrentSurahIndex((current) => current + 1)}
+                onClick={() =>
+                  setCurrentSurahIndex((current) => {
+                    const next = current + 1;
+                    if (next < quranSurahs.length) router.push(`/Quran/${next + 1}`);
+                    return next;
+                  })
+                }
                 disabled={!canGoNext}
                 className=" md:w-auto inline-flex items-center gap-2 rounded-full bg-gray-900 px-5 py-2 text-sm font-medium text-white transition hover:bg-gray-700 disabled:cursor-not-allowed disabled:opacity-40"
               >

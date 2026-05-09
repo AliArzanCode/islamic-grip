@@ -9,6 +9,14 @@
   font-style: oblique;
   font-display: swap;
 }
+@font-face {
+  font-family: 'Al Qalam';
+  src: url('/fonts/al_qalam_quran_majeed-webfont.woff2') format('woff2'),
+       url('/fonts/al_qalam_quran_majeed-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: oblique;
+  font-display: swap;
+}
 html,
 body {
   overflow-x: hidden;
@@ -22,6 +30,14 @@ body {
   font-size: 30px;
   word-spacing: 3px;
 
+}
+.arabic-text {
+  font-family: 'Al Qalam', serif;
+  direction: rtl;
+  text-align: right;
+  font-size: 40px;
+  line-height: 2.2;
+  word-spacing: 4px;
 }
 
 .font  {
