@@ -2,13 +2,16 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 import "./page.css";
 import { signIn } from "next-auth/react"
 
 
 const Page = () => {
+    const searchParams = useSearchParams();
+    const callbackUrl = searchParams.get("callbackUrl") || "/";
+
     return (
         <main className="login-shell">
             <div className="login-ambient login-ambient-one" />
@@ -40,15 +43,15 @@ const Page = () => {
                     <div className="divider">Or continue with</div>
 
                     <div className="social-grid">
-                        <button className="social-btn" type="button" onClick={() => signIn("google", { callbackUrl: "/" })}>
+                        <button className="social-btn" type="button" onClick={() => signIn("google", { callbackUrl })}>
                             <span>G</span>
                             Google
                         </button>
-                        <button className="social-btn" type="button" onClick={() => signIn("facebook", { callbackUrl: "/" })}>
+                        <button className="social-btn" type="button" onClick={() => signIn("facebook", { callbackUrl })}>
                             <span>f</span>
                             Facebook
                         </button>
-                        <button className="social-btn" type="button" onClick={() => signIn("twitter", { callbackUrl: "/" })}>
+                        <button className="social-btn" type="button" onClick={() => signIn("twitter", { callbackUrl })}>
                             <span>X</span>
                             Twitter
                         </button>

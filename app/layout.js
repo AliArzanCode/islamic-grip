@@ -22,17 +22,15 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <meta name="google-site-verification" content="OYdT5V9qm555FlOEK_Bm_rCW-pD3ga9Y6szHZFnbrP4" />
-     <SessionWrapper>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
         cz-shortcut-listen="true"
       >
-        
-        {children}
-        <Footer />
-      
+        <SessionWrapper>
+          <main className="flex-grow">{children}</main>
+          <Footer />
+        </SessionWrapper>
       </body>
-      </SessionWrapper>
     </html>
   );
 }

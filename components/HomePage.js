@@ -8,6 +8,7 @@ import Link from "next/link";
 import { useSession } from "next-auth/react";
 import Quran from "@/public/koran.png"
 import ComingSoonCard from "@/components/Coming-soon";
+import Location from "@/components/Location";
 import { useRef } from "react";
 
 export default function HomePage() {
@@ -148,12 +149,15 @@ export default function HomePage() {
               <p className="mt-2 max-w-xs text-xs leading-5 text-gray-300 sm:text-sm sm:leading-6">
                 Tap this card to read the full Quran page with surah navigation.
               </p>
+              
             </div>
           </div>
         </Link>
       </div>
 
-      <ComingSoonCard />
+      
+      <Location />
+<ComingSoonCard />
     </>
   );
 }

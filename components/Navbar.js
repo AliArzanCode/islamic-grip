@@ -58,19 +58,19 @@ const Navbar = () => {
 
         <ul className="hidden md:flex items-center gap-2 lg:gap-4">
           <li>
-            <Link href="/" className="rounded-lg px-3 py-1.5 text-sm font-semibold hover:bg-green-600 hover:text-white">
-              Home
+            <Link href="#about" className="rounded-lg px-3 py-1.5 text-sm font-semibold hover:bg-green-600 hover:text-white">
+              About Us
             </Link>
           </li>
           <li>
-            <a href="#about" className="rounded-lg px-3 py-1.5 text-sm font-semibold hover:bg-green-600 hover:text-white">
-              About
+            <a href="#contact" className="rounded-lg px-3 py-1.5 text-sm font-semibold hover:bg-green-600 hover:text-white">
+              Contact Us
             </a>
           </li>
           <li>
-            <a href="#contact" className="rounded-lg px-3 py-1.5 text-sm font-semibold hover:bg-green-600 hover:text-white">
-              Contact
-            </a>
+           <Link href="/library" className="rounded-lg  px-3 py-1.5 text-sm font-semibold hover:bg-green-600 hover:text-white">
+              Library
+            </Link>
           </li>
           <li>
             <Link href="/NamazTiming" className="rounded-lg  px-3 py-1.5 text-sm font-semibold hover:bg-green-600 hover:text-white">
@@ -170,21 +170,12 @@ const Navbar = () => {
         <ul className="mt-5 space-y-3">
           <li>
             <Link
-              href="/"
-              onClick={() => setIsMenuOpen(false)}
-              className="block rounded-xl border border-white/15 px-4 py-3 text-lg font-semibold hover:bg-white/10"
-            >
-              Home
-            </Link>
-          </li>
-          <li>
-            <a
               href="#about"
               onClick={() => setIsMenuOpen(false)}
               className="block rounded-xl border border-white/15 px-4 py-3 text-lg font-semibold hover:bg-white/10"
             >
-              About
-            </a>
+              About Us
+            </Link>
           </li>
           <li>
             <a
@@ -192,8 +183,17 @@ const Navbar = () => {
               onClick={() => setIsMenuOpen(false)}
               className="block rounded-xl border border-white/15 px-4 py-3 text-lg font-semibold hover:bg-white/10"
             >
-              Contact
+              Contact Us
             </a>
+          </li>
+          <li>
+            <Link
+              href="/library"
+              onClick={() => setIsMenuOpen(false)}
+              className="block rounded-xl border border-white/15 px-4 py-3 text-lg font-semibold hover:bg-white/10"
+            >
+              Library
+            </Link>
           </li>
           <li>
             <Link
