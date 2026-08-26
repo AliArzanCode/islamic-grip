@@ -159,7 +159,7 @@ export default async function LibraryPage() {
 					href={getReadHref(book.pdf_url)}
 					target={getReadTarget}
 					rel={getReadRel}
-					className="flex flex-col items-center rounded p-4 text-center transition-transform duration-300 hover:-translate-y-1"
+					className="flex flex-col items-center rounded p-2 text-center transition-transform duration-300 hover:-translate-y-1"
 				>
 					{book.cover_url ? (
 						<Image
@@ -170,7 +170,7 @@ export default async function LibraryPage() {
 							className="mx-auto rounded"
 						/>
 					) : (
-						<div className="mx-auto flex h-[200px] w-[100px] items-center justify-center rounded bg-emerald-200 px-2 text-center text-xs text-emerald-950">
+						<div className="flex h-[200px] w-[100px] items-center justify-center rounded bg-emerald-200  text-center text-xs text-emerald-950">
 							No cover image
 						</div>
 					)}

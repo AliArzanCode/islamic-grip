@@ -7,9 +7,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import Quran from "@/public/koran.png"
-import ComingSoonCard from "@/components/Coming-soon";
+import ComingSoonCard from "@/components/Library";
 import Location from "@/components/Location";
 import { useRef } from "react";
+import QiblaCompass from "@/components/QiblaCompass";
 
 export default function HomePage() {
   const { status } = useSession();
@@ -20,6 +21,7 @@ export default function HomePage() {
   const [ayah, setAyah] = useState("");
   const [showLoginReminder, setShowLoginReminder] = useState(false);
   const ref = useRef(null);
+  const [showQibla, setShowQibla] = useState(false);
 
   const handleQuranOpen = (event) => {
     if (status !== "authenticated") {
@@ -158,6 +160,19 @@ export default function HomePage() {
       
       <Location />
 <ComingSoonCard />
+{!showQibla ? (
+        <button onClick={() => setShowQibla(true)}>
+          🕋 Find Qibla
+        </button>
+      ) : (
+        <>
+          <button onClick={() => setShowQibla(false)}>
+            ← Back
+          </button>
+
+          <QiblaCompass />
+        </>
+      )}
     </>
   );
 }

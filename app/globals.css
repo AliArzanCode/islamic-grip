@@ -81,3 +81,112 @@ body {
     -moz-osx-font-smoothing: grayscale;
   }
 }
+.qibla-wrap {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 8px;
+          padding: 24px 16px;
+          text-align: center;
+          font-family: system-ui, -apple-system, sans-serif;
+        }
+        .qibla-title { margin: 0 0 4px; font-size: 20px; }
+        .qibla-btn {
+          padding: 8px 18px;
+          border-radius: 999px;
+          border: none;
+          background: #b8863f;
+          color: #fff;
+          font-weight: 600;
+          cursor: pointer;
+        }
+        .qibla-error { color: #c0392b; }
+        .qibla-loading { opacity: 0.7; }
+        .qibla-reading { margin: 2px 0; font-variant-numeric: tabular-nums; }
+
+        .scene { perspective: 900px; padding: 30px 0; }
+        .compass-3d {
+          position: relative;
+          width: 240px;
+          height: 240px;
+          transform-style: preserve-3d;
+          transform: rotateX(40deg);
+        }
+        .bezel {
+          position: absolute;
+          inset: 0;
+          border-radius: 50%;
+          background: conic-gradient(from 0deg, #caa15a, #f3e2b8, #a8783b, #f3e2b8, #caa15a);
+          box-shadow:
+            0 26px 34px -12px rgba(0, 0, 0, 0.55),
+            inset 0 2px 5px rgba(255, 255, 255, 0.65),
+            inset 0 -6px 10px rgba(0, 0, 0, 0.35);
+        }
+        .dial {
+          position: absolute;
+          inset: 13px;
+          border-radius: 50%;
+          background: radial-gradient(circle at 35% 30%, #223229, #0a100d 72%);
+          box-shadow: inset 0 0 22px rgba(0, 0, 0, 0.85);
+          transition: transform 0.18s ease-out;
+        }
+        .cardinal {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          color: #e9dcb4;
+          font-weight: 700;
+          font-size: 14px;
+        }
+        .cardinal.n { transform: translate(-50%, -50%) translateY(-78px); color: #e2b04a; }
+        .cardinal.e { transform: translate(-50%, -50%) translateX(78px); }
+        .cardinal.s { transform: translate(-50%, -50%) translateY(78px); }
+        .cardinal.w { transform: translate(-50%, -50%) translateX(-78px); }
+        .tick {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          width: 1.5px;
+          height: 8px;
+          margin: -4px 0 0 -0.75px;
+          background: rgba(233, 220, 180, 0.4);
+        }
+        .tick-major { width: 2px; height: 12px; background: rgba(233, 220, 180, 0.75); }
+
+        .needle {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          width: 16px;
+          height: 90px;
+          margin-left: -8px;
+          margin-top: -90px;
+          transform-origin: 50% 100%;
+          transition: transform 0.18s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .needle-shaft {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(180deg, #ef5350, #8e0000 90%);
+          clip-path: polygon(50% 0%, 100% 62%, 62% 62%, 62% 100%, 38% 100%, 38% 62%, 0% 62%);
+          filter: drop-shadow(0 8px 8px rgba(0, 0, 0, 0.5));
+        }
+        .kaaba-icon {
+          position: absolute;
+          left: 50%;
+          top: 4px;
+          font-size: 22px;
+          filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.6));
+        }
+        .center-cap {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          width: 16px;
+          height: 16px;
+          margin: -8px;
+          border-radius: 50%;
+          background: radial-gradient(circle at 35% 30%, #f8e9bd, #96742f 80%);
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+          transform: translateZ(36px);
+        }
