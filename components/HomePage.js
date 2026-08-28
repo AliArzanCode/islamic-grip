@@ -166,7 +166,7 @@ export default function HomePage() {
         </button>
       ) : (
         <>
-          <button onClick={() => setShowQibla(false)}>
+          <button className="qibla-launch-btn" onClick={() => setShowQibla(false)}>
             ← Back
           </button>
 
