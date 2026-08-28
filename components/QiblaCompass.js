@@ -53,11 +53,11 @@ export default function QiblaCompass() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Assumes `location` is shaped like { latitude, longitude }.
+  // Assumes `location` is shaped like { lat, lon }.
   // Change these two accessors if your hook returns different keys.
   useEffect(() => {
-    if (location?.latitude == null || location?.longitude == null) return;
-    setQiblaDirection(qiblaBearing(location.latitude, location.longitude));
+    if (location?.lat == null || location?.lon == null) return;
+    setQiblaDirection(qiblaBearing(location.lat, location.lon));
   }, [location]);
 
   useEffect(() => {
