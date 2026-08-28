@@ -139,7 +139,9 @@ export default function QiblaCompass() {
 
       {!error && !loading && qiblaDirection !== null && (
         <>
-          <h2 className="qibla-title">🕋 Qibla Finder</h2>
+          <h2 className="qibla-title text-2xl font-bold tracking-wide text-amber-200 drop-shadow-md sm:text-3xl">
+            🕋 Qibla Finder
+          </h2>
 
           {needsPermission && (
             <button className="qibla-btn" onClick={enableCompass}>

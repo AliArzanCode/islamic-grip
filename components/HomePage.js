@@ -161,7 +161,7 @@ export default function HomePage() {
       <Location />
 <ComingSoonCard />
 {!showQibla ? (
-        <button onClick={() => setShowQibla(true)}>
+        <button className="qibla-launch-btn" onClick={() => setShowQibla(true)}>
           🕋 Find Qibla
         </button>
       ) : (
