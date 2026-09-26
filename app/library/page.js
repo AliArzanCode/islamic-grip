@@ -30,7 +30,8 @@ export default async function LibraryPage() {
 		);
 	}
 
-	const { data: books = [], error } = await supabase.from("books").select("*");
+	const { data: books = [], error } = await supabase.from("Shia_hadith_books").select("*");
+	const { data: books1 = [], error:error1 } = await supabase.from("Sunni_hadith_books").select("*");
 	const { data: books_khamenei = [], error: khameneiError } = await supabase.from("books_khamenei").select("*");
 
 	if (error) {
@@ -38,6 +39,15 @@ export default async function LibraryPage() {
 			<div className="rounded-2xl border border-red-200 bg-red-50 p-6 text-red-900">
 				<h1 className="text-xl font-semibold">Library could not load</h1>
 				<p className="mt-2 text-sm">{error.message}</p>
+			</div>
+		);
+	}
+
+	if (error1) {
+		return (
+			<div className="rounded-2xl border border-red-200 bg-red-50 p-6 text-red-900">
+				<h1 className="text-xl font-semibold">Sunni hadith books could not load</h1>
+				<p className="mt-2 text-sm">{error1.message}</p>
 			</div>
 		);
 	}
@@ -70,7 +80,14 @@ export default async function LibraryPage() {
 					</a>
 				</div>
 			) : null}
-			<div className="card relative flex flex-col gap-4 p-4  text-white md:h-90 md:flex-row md:p-5">
+			<section className="mx-4 mt-8 rounded-2xl border border-emerald-200 bg-emerald-50 p-5 text-emerald-950 sm:mx-6 sm:p-6">
+				<p className="text-sm font-semibold uppercase tracking-[0.18em] text-emerald-700">For Everyone</p>
+				<h2 className="mt-2 text-2xl font-bold">Universal Islamic Books</h2>
+				<p className="mt-2 max-w-3xl text-sm leading-6 text-emerald-900/80">
+					Explore foundational Islamic works that are available for everyone to read and learn from.
+				</p>
+
+				<div className="card relative mt-5 flex flex-col gap-4 text-white md:flex-row">
 
 			 {nahjulBooks.map((book) => (
 			<a
@@ -100,7 +117,8 @@ export default async function LibraryPage() {
 							</div>
 						</a>
  ))}
-			<div className="relative w-full overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br p-4 text-left shadow-lg transition-transform duration-300 hover:-translate-y-1 hover:shadow-2xl md:w-1/2 md:p-5">
+
+				<div className="relative w-full overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br p-4 text-left shadow-lg transition-transform duration-300 hover:-translate-y-1 hover:shadow-2xl md:w-1/2 md:p-5">
 				<div
 					aria-hidden="true"
 					className="absolute inset-0 bg-[url('/ayatullah_1.jpg')] bg-cover bg-center blur-[1px] scale-105"
@@ -149,8 +167,63 @@ export default async function LibraryPage() {
 		  </div>
 		  </div>
 		  </div>
-		</div>
-		<div className="grid grid-cols-2 gap-4 border border-emerald-200 p-3 bg-emerald-100 rounded md:grid-cols-4">
+				</div>
+			</section>
+
+		<details className="group mx-4 mt-8 rounded-2xl border border-amber-200 bg-amber-50 p-5 text-amber-950 sm:mx-6 sm:p-6">
+			<summary className="cursor-pointer list-none">
+			<p className="text-sm font-semibold uppercase tracking-[0.18em] text-amber-700">For Sunni</p>
+			<h2 className="mt-2 text-2xl font-bold">Sunni Hadith Collections</h2>
+			<p className="mt-2 max-w-3xl text-sm leading-6 text-amber-900/80">
+				Major hadith collections recognized in Sunni scholarship. Individual narrations may have different classifications according to hadith methodology.
+			</p>
+			</summary>
+			<div className="mt-4 grid grid-cols-2 gap-4 rounded-lg border border-amber-300 bg-amber-100 p-5 sm:mx-6 md:grid-cols-7">
+				{books1.length ? books1.map((book) => (
+					<a
+						key={book.id}
+						href={getReadHref(book.pdf_url)}
+						target={getReadTarget}
+						rel={getReadRel}
+						className="flex flex-col items-center rounded p-2 text-center transition-transform duration-300 hover:-translate-y-1"
+					>
+						{book.cover_url ? (
+							<Image
+								src={book.cover_url}
+								alt={book.title}
+								width={100}
+								height={200}
+								className="mx-auto rounded"
+							/>
+						) : (
+							<div className="flex h-[200px] w-[100px] items-center justify-center rounded bg-amber-200 text-center text-xs text-amber-950">
+								No cover image
+							</div>
+						)}
+						<span className="mt-2 inline-flex w-[100px] items-center justify-center rounded bg-amber-700 px-2 py-1 text-xs text-white">
+							Read Book
+						</span>
+						<h2 className="mt-2 text-center font-semibold">{book.title}</h2>
+					</a>
+				)) : (
+					<div className="col-span-full rounded border border-dashed border-amber-300 bg-white p-4 text-sm text-gray-700">
+						No Sunni hadith books have been added yet.
+					</div>
+				)}
+			</div>
+		</details>
+
+		<details className="group mx-4 mt-8 rounded-2xl border border-sky-200 bg-sky-50 p-5 text-sky-950 sm:mx-6 sm:p-6">
+			<summary className="cursor-pointer list-none">
+			<p className="text-sm font-semibold uppercase tracking-[0.18em] text-sky-700">For Shia</p>
+			<h2 className="mt-2 text-2xl font-bold">Twelver Shia Hadith Collections</h2>
+			<p className="mt-2 max-w-3xl text-sm leading-6 text-sky-900/80">
+				The Books that are foundational collections in Twelver Shia scholarship. Individual narrations are evaluated according to Shia hadith methodology.
+			</p>
+			</summary>
+		
+
+		<div className="mt-4 grid grid-cols-2 gap-4 rounded-lg  sm:mx-6 md:grid-cols-7 border border-sky-300 bg-sky-100 p-5">
 
 
 			{books.length ? books.map((book) => (
@@ -183,8 +256,10 @@ export default async function LibraryPage() {
 				<div className="col-span-full rounded border border-dashed border-emerald-300 bg-white p-4 text-sm text-gray-700">
 					Books have to be added yet.
 				</div>
+				
 			)}
 		</div>
+		</details>
         </>
 	);
 }
